@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameArena - AI-Powered Casual Games</title>
+    <meta name="description" content="GameArena: Describe your idea, AI generates a playable casual game in seconds. Share it, get likes, and challenge others in the Arena.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/icon/app_icon.png">
+    <style>
+        /* ── Hero ── */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 120px 20px 80px; }
+        .hero-inner { max-width: 780px; margin: 0 auto; text-align: center; }
+        .badge { display: inline-block; padding: 6px 18px; border: 1px solid var(--primary); border-radius: 30px; color: var(--primary); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px; }
+        .hero-title { font-family: var(--font-heading); font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; line-height: 1.15; margin-bottom: 18px; }
+        .hero-title .line1 { color: #fff; }
+        .hero-title .line2 { background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-sub { font-size: 1.15rem; color: var(--text-muted); max-width: 560px; margin: 0 auto 40px; line-height: 1.7; }
+        .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .hero-btns .btn-primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #000; font-weight: 700; padding: 14px 36px; border-radius: 8px; text-decoration: none; font-family: var(--font-heading); font-size: 0.85rem; letter-spacing: 1px; transition: opacity .2s, transform .2s; }
+        .hero-btns .btn-primary:hover { opacity: .85; transform: translateY(-2px); }
+        .hero-btns .btn-ghost { border: 1px solid rgba(255,255,255,0.25); color: #fff; padding: 14px 36px; border-radius: 8px; text-decoration: none; font-family: var(--font-heading); font-size: 0.85rem; letter-spacing: 1px; transition: border-color .2s; }
+        .hero-btns .btn-ghost:hover { border-color: var(--primary); }
+
+        /* ── 3 Core Features ── */
+        .features { padding: 100px 20px; }
+        .features .container { max-width: 1100px; margin: 0 auto; }
+        .sec-label { text-align: center; color: var(--primary); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; }
+        .sec-title { text-align: center; font-family: var(--font-heading); font-size: clamp(1.5rem, 3vw, 2.2rem); color: #fff; margin-bottom: 60px; }
+        .feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
+        .feat-card { background: var(--bg-panel); border: 1px solid rgba(0,243,255,0.12); border-radius: 16px; padding: 40px 32px; position: relative; overflow: hidden; transition: border-color .25s, transform .25s; }
+        .feat-card:hover { border-color: rgba(0,243,255,0.5); transform: translateY(-4px); }
+        .feat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+        .feat-icon { font-size: 2.5rem; margin-bottom: 20px; }
+        .feat-card h3 { font-family: var(--font-heading); font-size: 1.05rem; color: #fff; margin-bottom: 14px; letter-spacing: 1px; }
+        .feat-card p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
+
+        /* ── Steps ── */
+        .steps { padding: 80px 20px; background: rgba(0,243,255,0.03); }
+        .steps-inner { max-width: 900px; margin: 0 auto; }
+        .step-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0; counter-reset: steps; }
+        .step { text-align: center; padding: 32px 20px; position: relative; }
+        .step + .step::before { content: ''; position: absolute; left: 0; top: 56px; width: 2px; height: 30px; background: linear-gradient(var(--primary), var(--secondary)); opacity: 0.4; }
+        .step-num { font-family: var(--font-heading); font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
+        .step h4 { font-family: var(--font-heading); font-size: 0.9rem; color: #fff; margin-bottom: 8px; }
+        .step p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* ── Download CTA ── */
+        .download { padding: 100px 20px; text-align: center; }
+        .download h2 { font-family: var(--font-heading); font-size: clamp(1.4rem, 3vw, 2rem); color: #fff; margin-bottom: 16px; }
+        .download p { color: var(--text-muted); margin-bottom: 40px; font-size: 1rem; }
+        .store-badges { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .store-badge { display: flex; align-items: center; gap: 10px; background: var(--bg-panel); border: 1px solid rgba(255,255,255,0.15); padding: 14px 28px; border-radius: 10px; color: #fff; text-decoration: none; transition: border-color .2s, transform .2s; }
+        .store-badge:hover { border-color: var(--primary); transform: translateY(-2px); }
+        .store-badge .store-icon { font-size: 1.6rem; }
+        .store-badge .store-text small { display: block; font-size: 11px; color: var(--text-muted); }
+        .store-badge .store-text strong { font-size: 1rem; }
+
+        /* ── Footer ── */
+        footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 32px 20px; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+        footer a { color: var(--primary); text-decoration: none; margin: 0 10px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-logo { font-family: var(--font-heading); font-size: 1.1rem; color: #fff; margin-bottom: 12px; }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/icon/app_icon.png" alt="GameArena" class="logo-img">
+                <span class="logo-text">GameArena</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#download" class="nav-link">Download</a>
+                <a href="privacy.html" class="nav-link">Privacy</a>
+                <a href="terms.html" class="nav-link">Terms</a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu">
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#download" class="nav-link">Download</a>
+            <a href="privacy.html" class="nav-link">Privacy</a>
+            <a href="terms.html" class="nav-link">Terms</a>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="badge">🎮 AI · Games · Arena</div>
+            <h1 class="hero-title">
+                <span class="line1">Describe It.</span><br>
+                <span class="line2">Play It. Win It.</span>
+            </h1>
+            <p class="hero-sub">
+                GameArena uses AI to instantly generate casual games from a single sentence.
+                Publish your creation, collect likes, and challenge players in the Arena — no coding needed.
+            </p>
+            <div class="hero-btns">
+                <a href="#download" class="btn-primary">Download Now</a>
+                <a href="#features" class="btn-ghost">See How It Works</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="sec-label">What You Can Do</div>
+            <h2 class="sec-title">3 Core Features</h2>
+            <div class="feat-grid">
+
+                <div class="feat-card">
+                    <div class="feat-icon">🤖</div>
+                    <h3>AI Game Generator</h3>
+                    <p>Type one sentence — AI writes, builds, and delivers a fully playable casual game in seconds. No code. No design skills required. Just your imagination.</p>
+                </div>
+
+                <div class="feat-card">
+                    <div class="feat-icon">🏟️</div>
+                    <h3>Arena &amp; PK</h3>
+                    <p>Publish your game to the Arena feed. Other players can like, comment, and challenge you head-to-head in real-time PK matches to see whose AI creation reigns supreme.</p>
+                </div>
+
+                <div class="feat-card">
+                    <div class="feat-icon">⭐</div>
+                    <h3>Points &amp; Rewards</h3>
+                    <p>Earn points every time your game is played or liked. Spend points to unlock advanced AI generation capabilities and power up your next creation.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="steps">
+        <div class="steps-inner">
+            <div class="sec-label">Simple as 1-2-3-4</div>
+            <h2 class="sec-title" style="text-align:center;margin-bottom:48px;">How It Works</h2>
+            <div class="step-list">
+                <div class="step">
+                    <div class="step-num">01</div>
+                    <h4>Describe</h4>
+                    <p>Tell the AI what kind of game you want.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">02</div>
+                    <h4>Generate</h4>
+                    <p>AI builds a complete playable game instantly.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">03</div>
+                    <h4>Publish</h4>
+                    <p>Share it to the Arena feed for everyone.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">04</div>
+                    <h4>Compete</h4>
+                    <p>Get likes, earn points, win PK battles.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download -->
+    <section id="download" class="download">
+        <h2>Ready to Play?</h2>
+        <p>Download GameArena and start generating your first game in under 30 seconds.</p>
+        <div class="store-badges">
+            <a href="#" class="store-badge">
+                <span class="store-icon">🍎</span>
+                <div class="store-text">
+                    <small>Download on the</small>
+                    <strong>App Store</strong>
+                </div>
+            </a>
+            <a href="#" class="store-badge">
+                <span class="store-icon">▶</span>
+                <div class="store-text">
+                    <small>Get it on</small>
+                    <strong>Google Play</strong>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">GameArena</div>
+        <div>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="mailto:xiongsl2013@gmail.com">Contact</a>
+        </div>
+        <p style="margin-top:14px;">© 2025 GameArena. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
